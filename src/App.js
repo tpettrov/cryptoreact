@@ -7,7 +7,7 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {ethstats: []};
+        this.state = {price: 0};
     }
 
     componentDidMount() {
@@ -15,10 +15,16 @@ class App extends Component {
     }
 
     getStats() {
-        return fetch('https://api.coinmarketcap.com/v1/ticker/ethereum')
-            .then((data) => {
-                this.setState({ ethstats: data });
-            });
+
+        let that = this;
+        let url = 'https://api.coinmarketcap.com/v1/ticker/ethereum/';
+
+        fetch(url).then(function(response) {
+            return response.json()
+        }).then(function(data) {
+            that.setState({price: data[0].price_usd});
+        })
+
     }
 
 
@@ -31,7 +37,7 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
         <p className="App-intro">
-          Eth price is: {this.state.ethstats}
+          Eth price is: {this.state.price}
         </p>
       </div>
     );

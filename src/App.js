@@ -11,7 +11,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        this.getStats();
+        let updateInterval = setInterval(this.getStats.bind(this), 7000);
     }
 
     getStats() {

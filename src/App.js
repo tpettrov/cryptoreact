@@ -10,7 +10,8 @@ class App extends Component {
         this.state = {price: 0};
     }
 
-    componentDidMount() {
+    componentWillMount() {
+        this.getStats();
         let updateInterval = setInterval(this.getStats.bind(this), 7000);
     }
 

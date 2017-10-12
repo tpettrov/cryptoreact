@@ -20,6 +20,8 @@ class App extends Component {
         clearInterval(this.state.updateInterval);
     }
 
+    //https://stackoverflow.com/questions/19135143/synchronization-of-two-timers-setinterval
+
     getStats() {
 
         let that = this;

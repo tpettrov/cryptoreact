@@ -2,24 +2,28 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import PriceComponent from './components/PriceComponent';
+import BackCounterComponent from './components/BackCounterComponent';
 
 class App extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {price: 0};
+        this.state = {price: 0, updateInterval: 0};
     }
 
     componentWillMount() {
         this.getStats();
-        let updateInterval = setInterval(this.getStats.bind(this), 7000);
+        this.setState({updateInterval: setInterval(this.getStats.bind(this), 7000)});
+    }
+
+    componentWillUnmount(){
+        clearInterval(this.state.updateInterval);
     }
 
     getStats() {
 
         let that = this;
         let url = 'https://api.coinmarketcap.com/v1/ticker/ethereum/';
-
         fetch(url).then(function(response) {
             return response.json()
         }).then(function(data) {
@@ -37,6 +41,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to CryptoReact</h2>
         </div>
+          <BackCounterComponent/>
         <PriceComponent price={this.state.price}></PriceComponent>
       </div>
     );

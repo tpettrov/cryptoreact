@@ -4,21 +4,25 @@ class PriceComponent extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {price: 0, change:'neutral'};
+        this.state = {price: 0};
     }
 
-    componentWillReceiveProps(newProps) {
+    shouldComponentUpdate(newProps) {
 
         if (newProps.price !== this.state.price) {
 
             this.setState({change: 'positive'});
             console.log('changed positive ' + new Date().toLocaleTimeString());
+            this.setState({price: newProps.price});
+            return true;
         } else {
+            return false;
             this.setState({change: 'negative'});
             console.log('changed negative');
+
         }
 
-        this.setState({price: newProps.price});
+
     }
 
     render() {

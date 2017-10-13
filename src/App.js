@@ -56,9 +56,10 @@ class App extends Component {
                     <img src={logo} className="App-logo" alt="logo"/>
                     <h2>Welcome to CryptoReact</h2>
                 </div>
-                <BackCounterComponent backCounter={this.state.backCounterValue}/>
-                <PriceComponent price={this.state.price}></PriceComponent>
+                <div><BackCounterComponent backCounter={this.state.backCounterValue}/></div>
+                <div><PriceComponent price={this.state.price}></PriceComponent></div>
             </div>
+
         );
     }
 }

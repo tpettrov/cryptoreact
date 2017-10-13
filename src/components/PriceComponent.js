@@ -7,7 +7,7 @@ class PriceComponent extends Component {
         this.state = {price: 0};
     }
 
-    shouldComponentUpdate(newProps) {
+    componentWillReceiveProps(newProps) {
 
         if (newProps.price !== this.state.price) {
 
@@ -16,10 +16,10 @@ class PriceComponent extends Component {
             this.setState({price: newProps.price});
             return true;
         } else {
-            return false;
+
             this.setState({change: 'negative'});
             console.log('changed negative');
-
+            return false;
         }
 
 

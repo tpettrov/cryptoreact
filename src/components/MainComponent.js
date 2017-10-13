@@ -46,8 +46,7 @@ class MainComponent extends Component {
 
     render() {
         return (
-            <div className="App">
-
+            <div>
                 <BackCounterComponent backCounter={this.state.backCounterValue}></BackCounterComponent>
                 <PriceComponent price={this.state.price}></PriceComponent>
             </div>

@@ -13,17 +13,17 @@ class App extends Component {
 
     componentDidMount() {
         this.getStats();
-        this.setState({updateInterval: setInterval(this.count.bind(this), 1000)});
+        this.setState({updateIntervalID: setInterval(this.count.bind(this), 1000)});
     }
 
     componentWillUnmount() {
-        clearInterval(this.state.updateInterval);
+        clearInterval(this.state.updateIntervalID);
     }
 
 
     count() {
 
-        if (this.state.backCounterValue == 0) {
+        if (this.state.backCounterValue === 0) {
             this.getStats();
             this.setState(previousState => {
             return {backCounterValue: previousState.backCounterValue + 7}
@@ -39,11 +39,11 @@ class App extends Component {
     getStats() {
 
         let that = this;
-        let url = 'https://api.coinmarketcap.com/v1/ticker/ethereum/';
+        let url = 'https://poloniex.com/public?command=returnTicker';
         fetch(url).then(function (response) {
             return response.json()
         }).then(function (data) {
-            that.setState({price: data[0].price_usd});
+            that.setState({price: data.USDT_ETH.last});
         })
 
     }

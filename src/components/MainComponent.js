@@ -8,13 +8,7 @@ class MainComponent extends Component {
 
     componentWillMount() {
         mainActions.getPrice();
-        //this.setState({updateIntervalID: setInterval(this.count.bind(this), 1000)});
     }
-
-    componentWillUnmount() {
-        clearInterval(this.state.updateIntervalID);
-    }
-
 
     render() {
         return (

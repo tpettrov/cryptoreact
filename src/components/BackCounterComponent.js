@@ -11,8 +11,12 @@ class BackCounterComponent extends Component {
 
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.setState({updateIntervalID: setInterval(this.count.bind(this), 1000)});
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.state.updateIntervalID);
     }
 
     count() {

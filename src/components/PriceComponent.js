@@ -16,15 +16,18 @@ class PriceComponent extends Component {
 
     handlePriceFetched(data) {
 
-        if (this.state.price < data.USDT_ETH.last  ) {
-            this.setState({change: 'negative'});
-        } else if (this.state.price === data.USDT_ETH.last) {
+        let newFetchedPrice = data.USDT_ETH.last;
+        let oldPrice = this.state.price;
+
+        if (Number(oldPrice) < Number(newFetchedPrice)) {
+            this.setState({change: 'positive'});
+        } else if (Number(oldPrice) === Number(newFetchedPrice)) {
             this.setState({change: 'neutral'});
         } else {
-            this.setState({change: 'positive'});
+            this.setState({change: 'negative'});
         }
-
-        this.setState({price: data.USDT_ETH.last});
+        console.log(`oldprice: ${oldPrice} newprice: ${newFetchedPrice} change: ${this.state.change}`);
+        this.setState({price: newFetchedPrice});
 
     }
 

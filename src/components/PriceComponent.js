@@ -7,7 +7,7 @@ class PriceComponent extends Component {
         super(props);
         this.state = {
             price: 0,
-            change: 'negative'
+            change: 'Nothing yet changed'
         };
 
         mainStore.on(mainStore.eventTypes.PRICE_FETCHED, this.handlePriceFetched.bind(this))
@@ -35,7 +35,7 @@ class PriceComponent extends Component {
         return (
             <div>
                 <p className="App-intro"> Eth price is: {this.state.price} $</p>
-                <p>Change: {this.state.change} </p>
+                <p>Last change: {this.state.change} </p>
             </div>)
     }
 }

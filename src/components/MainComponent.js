@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import mainActions from '../actions/MainActions'
 import PriceComponent from '../components/PriceComponent';
 import BackCounterComponent from '../components/BackCounterComponent';
+import PredictComponent from '../components/PredictComponent';
 
 class MainComponent extends Component {
 
@@ -15,6 +16,7 @@ class MainComponent extends Component {
             <div>
                 <BackCounterComponent></BackCounterComponent>
                 <PriceComponent></PriceComponent>
+                <PredictComponent/>
             </div>
 
         );

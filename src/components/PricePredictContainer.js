@@ -17,6 +17,7 @@ class PricePredictContainer extends Component {
         };
 
         mainStore.on(mainStore.eventTypes.PRICE_FETCHED, this.handlePriceFetched.bind(this))
+        this.setPredictionValue = this.setPredictionValue.bind(this);
     }
 
     handlePriceFetched(data) {
@@ -38,8 +39,6 @@ class PricePredictContainer extends Component {
     }
 
     setPredictionValue(value) {
-        console.log(value);
-
         this.setState({value: value}, () => console.log(this.state.value));
         this.setState({predictionDisabled: true});
         this.setState((prevState, props) => ({

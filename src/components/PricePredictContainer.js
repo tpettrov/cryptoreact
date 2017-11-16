@@ -11,7 +11,9 @@ class PricePredictContainer extends Component {
             prediction: 'initial',
             lastChangeType: 'Nothing yet changed',
             price: 0,
-            predictionDisabled: true
+            predictionDisabled: false,
+            attempts: 0,
+            value: ''
         };
 
         mainStore.on(mainStore.eventTypes.PRICE_FETCHED, this.handlePriceFetched.bind(this))
@@ -36,10 +38,12 @@ class PricePredictContainer extends Component {
     }
 
     setPredictionValue(value) {
+        console.log(value);
+
         this.setState({value: value}, () => console.log(this.state.value));
         this.setState({predictionDisabled: true});
         this.setState((prevState, props) => ({
-            attempts: prevState.attempts + 1
+            attempts: prevState.attempts++
         }));
     }
 
@@ -48,7 +52,7 @@ class PricePredictContainer extends Component {
         return (
             <div>
                 <PriceComponent price={this.state.price} lastChangeType={this.state.lastChangeType}/>
-                <PredictComponent predictionDisabled={this.state.predictionDisabled}/>
+                <PredictComponent predictionState ={this.state.predictionDisabled} onPrediction={this.setPredictionValue}/>
             </div>)
     }
 }

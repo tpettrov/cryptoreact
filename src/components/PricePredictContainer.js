@@ -2,18 +2,19 @@ import React, {Component} from 'react';
 import PredictComponent from './PredictComponent';
 import PriceComponent from "./PriceComponent";
 import mainStore from "../stores/MainStore";
+import ResultsComponent from "./ResultsComponent"
 
 class PricePredictContainer extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            prediction: 'initial',
             lastChangeType: 'Nothing yet changed',
             price: 0,
             predictionDisabled: false,
-            attempts: 0,
-            value: ''
+            predictionAttempts: 0,
+            predictionValue: 'initial',
+            rightAttemps: 0
         };
 
         mainStore.on(mainStore.eventTypes.PRICE_FETCHED, this.handlePriceFetched.bind(this))
@@ -36,13 +37,21 @@ class PricePredictContainer extends Component {
         this.setState({price: newFetchedPrice});
         this.setState({predictionDisabled: false})
 
+        if (this.state.lastChangeType === this.state.predictionValue) {
+            this.setState((prevState, props) => ({
+                rightAttemps: prevState.rightAttemps + 1
+            }));
+        }
+
+        this.setState({predictionValue: 'initial'})
+
     }
 
     setPredictionValue(value) {
-        this.setState({value: value}, () => console.log(this.state.value));
+        this.setState({predictionValue: value}, () => console.log(this.state.predictionValue));
         this.setState({predictionDisabled: true});
         this.setState((prevState, props) => ({
-            attempts: prevState.attempts++
+            predictionAttempts: prevState.predictionAttempts + 1
         }));
     }
 
@@ -50,8 +59,12 @@ class PricePredictContainer extends Component {
     render() {
         return (
             <div>
-                <PriceComponent price={this.state.price} lastChangeType={this.state.lastChangeType}/>
-                <PredictComponent predictionState ={this.state.predictionDisabled} onPrediction={this.setPredictionValue}/>
+                <PriceComponent price={this.state.price}
+                                lastChangeType={this.state.lastChangeType}/>
+                <PredictComponent predictionState ={this.state.predictionDisabled}
+                                  onPrediction={this.setPredictionValue}/>
+                <ResultsComponent attemptsCount={this.state.predictionAttempts}
+                                  points={this.state.rightAttemps}/>
             </div>)
     }
 }

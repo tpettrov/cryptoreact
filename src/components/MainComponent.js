@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import mainActions from '../actions/MainActions'
-import PriceComponent from '../components/PriceComponent';
 import BackCounterComponent from '../components/BackCounterComponent';
-import PredictComponent from '../components/PredictComponent';
+import PricePredictContainer from "./PricePredictContainer";
 
 class MainComponent extends Component {
 
@@ -15,8 +14,7 @@ class MainComponent extends Component {
         return (
             <div>
                 <BackCounterComponent></BackCounterComponent>
-                <PriceComponent></PriceComponent>
-                <PredictComponent/>
+                <PricePredictContainer/>
             </div>
 
         );

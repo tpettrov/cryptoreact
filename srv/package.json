@@ -1,0 +1,17 @@
+{
+  "name": "cryptoreact-srv",
+  "version": "1.0.0",
+  "description": "Server of the crypto react client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "crypto"
+  ],
+  "author": "Anton Petrov",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
